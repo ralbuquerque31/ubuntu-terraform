@@ -90,3 +90,5 @@ git push -u origin main
 Username: ralbuquerque31
 
 Password: Cole o Token gerado (não digite sua senha da conta).
+
+git push -u origin main --force
