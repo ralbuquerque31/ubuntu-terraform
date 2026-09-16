@@ -1,0 +1,13 @@
+# Terraform local state and modules
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfplan
+crash.log
+
+# Sistema e IDEs
+.DS_Store
+.vscode/
+.idea/
+*.swp

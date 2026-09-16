@@ -1,0 +1,9 @@
+services:
+  terraform-lab:
+    build: .
+    container_name: ubuntu-terraform
+    volumes:
+      - .:/app
+    stdin_open: true # Mantém a sessão STDIN aberta (-i)
+    tty: true        # Aloca um pseudo-TTY (-t)
+    working_dir: /app
