@@ -64,6 +64,11 @@ git commit -m "feat: ambiente docker lab para terraform no ubuntu"
 git remote add origin https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
 git push -u origin main
 
+4.Abrir o ambiente em outro computador ou notebook:Em qualquer outra máquina com Git e Docker instalados, basta clonar o projeto e subir o container:Bashgit clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
+cd SEU_REPOSITORIO
+docker compose up -d --build
+docker compose exec terraform-lab bash
+
 
 O erro ocorreu por dois motivos: o GitHub desativou a autenticação por senha tradicional via HTTPS em 2021 (exigindo um Personal Access Token ou Chave SSH) e a URL origin já ficou salva na primeira tentativa.
 
