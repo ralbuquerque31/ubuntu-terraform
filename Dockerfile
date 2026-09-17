@@ -1,10 +1,13 @@
 FROM ubuntu:24.04
 
-# Evita interrupções interativas durante a instalação de pacotes
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Instala pacotes essenciais
-RUN apt-get update && apt-get install -y \
+# Redireciona os repositórios para os espelhos da Azure (mais rápidos e estáveis)
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://azure.archive.ubuntu.com/ubuntu/|g' /etc/apt/sources.list.d/ubuntu.sources \
+    && sed -i 's|http://security.ubuntu.com/ubuntu/|http://azure.archive.ubuntu.com/ubuntu/|g' /etc/apt/sources.list.d/ubuntu.sources
+
+# Instala pacotes essenciais forçando conexão IPv4
+RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -o Acquire::ForceIPv4=true install -y \
     curl \
     gnupg \
     lsb-release \
@@ -18,7 +21,7 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/sh
     && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
 
 # Instala o Terraform
-RUN apt-get update && apt-get install -y terraform \
+RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -o Acquire::ForceIPv4=true install -y terraform \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
