@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:24.04
 
 # Evita interrupções interativas durante a instalação de pacotes
 ENV DEBIAN_FRONTEND=noninteractive
